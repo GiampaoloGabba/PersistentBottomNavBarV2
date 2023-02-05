@@ -22,12 +22,6 @@ class PersistentTabController extends ChangeNotifier {
   }
 
   jumpToTab(int value) {
-    assert(value >= 0);
-    if (_index == value) {
-      return;
-    }
-    _index = value;
-    this.onIndexChanged?.call(value);
-    notifyListeners();
+    index = value;
   }
 }

@@ -14,14 +14,14 @@ enum PageTransitionAnimation {
 Widget _slideRightRoute(BuildContext context, Animation<double> animation,
         Animation<double> secondaryAnimation, Widget? child) =>
     SlideTransition(
-        position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
+        position: Tween<Offset>(begin: Offset(-1, 0), end: Offset.zero)
             .animate(animation),
         child: child);
 
 Widget _slideUp(BuildContext context, Animation<double> animation,
         Animation<double> secondaryAnimation, Widget? child) =>
     SlideTransition(
-        position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)
+        position: Tween<Offset>(begin: Offset(0, 1), end: Offset.zero)
             .animate(animation),
         child: child);
 

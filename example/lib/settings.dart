@@ -13,7 +13,7 @@ class Settings {
   bool popAllScreensOnTapOfSelectedTab = true;
   bool avoidBottomPadding = true;
   Color navBarColor = Colors.white;
-  NavBarBuilder get navBarBuilder => navBarStyles[navBarStyle];
+  NavBarBuilder get navBarBuilder => navBarStyles[navBarStyle]!;
   String navBarStyle = "Style 1";
   EdgeInsets margin = EdgeInsets.all(0.0);
 
@@ -60,9 +60,9 @@ class SettingsView extends StatefulWidget {
   final void Function(Settings) onChanged;
 
   const SettingsView({
-    Key key,
-    this.settings,
-    this.onChanged,
+    Key? key,
+    required this.settings,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -97,10 +97,11 @@ class _SettingsViewState extends State<SettingsView> {
                 value: widget.settings.navBarColor,
                 icon: const Icon(Icons.arrow_downward),
                 elevation: 16,
-                onChanged: (Color value) {
-                  setState(() {
-                    widget.settings.navBarColor = value;
-                  });
+                onChanged: (Color? value) {
+                  if (value != null)
+                    setState(() {
+                      widget.settings.navBarColor = value;
+                    });
                   widget.onChanged(widget.settings);
                 },
                 items: colors.map<DropdownMenuItem<Color>>((Color value) {
@@ -132,10 +133,11 @@ class _SettingsViewState extends State<SettingsView> {
                 value: widget.settings.navBarStyle,
                 icon: const Icon(Icons.arrow_downward),
                 elevation: 16,
-                onChanged: (String value) {
-                  setState(() {
-                    widget.settings.navBarStyle = value;
-                  });
+                onChanged: (String? value) {
+                  if (value != null)
+                    setState(() {
+                      widget.settings.navBarStyle = value;
+                    });
                   widget.onChanged(widget.settings);
                 },
                 items: widget.settings.navBarStyles.keys

@@ -3,7 +3,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:persistent_bottom_nav_bar_v2_example_project/modal_screen.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key key}) : super(key: key);
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class MainScreen extends StatelessWidget {
 }
 
 class MainScreen2 extends StatelessWidget {
-  const MainScreen2({Key key}) : super(key: key);
+  const MainScreen2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +145,7 @@ class MainScreen2 extends StatelessWidget {
 }
 
 class MainScreen3 extends StatelessWidget {
-  const MainScreen3({Key key}) : super(key: key);
+  const MainScreen3({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

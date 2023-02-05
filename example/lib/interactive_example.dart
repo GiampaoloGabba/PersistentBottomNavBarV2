@@ -71,7 +71,7 @@ class _InteractiveExampleState extends State<InteractiveExample> {
     return PersistentTabView(
       controller: _controller,
       tabs: _tabs(),
-      navBarBuilder: (essentials) => settings.navBarBuilder(
+      navBarBuilder: (essentials) => settings.navBarBuilder.call(
         essentials,
         NavBarDecoration(
           color: settings.navBarColor,
