@@ -34,7 +34,7 @@ class _InteractiveExampleState extends State<InteractiveExample> {
           inactiveColorPrimary: Colors.grey,
         ),
       ),
-      PersistentTabConfig.noScreen(
+      PersistentTabConfig.tapAction(
         item: ItemConfig(
           icon: Icon(Icons.add),
           title: "Add",

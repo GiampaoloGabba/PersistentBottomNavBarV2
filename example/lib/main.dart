@@ -16,44 +16,56 @@ class PersistenBottomNavBarDemo extends StatelessWidget {
       title: 'Persistent Bottom Navigation Bar Demo',
       routerConfig: GoRouter(
         routes: [
-          // GoRoute(
-          //   path: '/',
-          //   builder: (context, state) => MinimalExample(),
-          //   routes: [
-          //     GoRoute(
-          //       path: ':tab',
-          //       builder: (BuildContext context, GoRouterState state) {
-          //         controller.jumpToTab(int.parse(state.params['tab'] ?? "0"));
-          //         return Container();
-          //       },
-          //     ),
-          //   ],
-          // ),
+          GoRoute(
+            path: '/',
+            builder: (context, state) => HomeScreen(),
+          ),
           ShellRoute(
             builder: (context, state, child) {
-              // controller.onIndexChanged = (value) {
-              //   GoRouter.of(context).go("/$value");
-              // };
-              // controller.jumpToTab(int.parse(state.params['tab'] ?? "0"));
+              // int tab = int.parse(state.params['tab'] ?? "0");
+              controller.onIndexChanged = (value) {
+                GoRouter.of(context).go("/$value");
+              };
+              // controller.jumpToTab(tab);
               // return MinimalExample();
-              return Scaffold(
-                body: child,
-                bottomNavigationBar: BottomNavigationBar(items: [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: "Home",
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: "Home",
-                  ),
-                ]),
+              return MinimalExample(
+                child: child,
               );
             },
             routes: [
               // This screen is displayed on the ShellRoute's Navigator.
               GoRoute(
-                path: '/:tab',
+                path: '/0',
+                builder: (BuildContext context, GoRouterState state) {
+                  return MainScreen();
+                },
+                routes: <RouteBase>[
+                  // This screen is displayed on the ShellRoute's Navigator.
+                  GoRoute(
+                    path: 'details',
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const MainScreen2();
+                    },
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: '/1',
+                builder: (BuildContext context, GoRouterState state) {
+                  return MainScreen();
+                },
+                routes: <RouteBase>[
+                  // This screen is displayed on the ShellRoute's Navigator.
+                  GoRoute(
+                    path: 'details',
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const MainScreen2();
+                    },
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: '/2',
                 builder: (BuildContext context, GoRouterState state) {
                   return MainScreen();
                 },
@@ -106,7 +118,9 @@ class HomeScreen extends StatelessWidget {
 }
 
 class MinimalExample extends StatefulWidget {
-  MinimalExample({Key? key}) : super(key: key);
+  final Widget child;
+
+  MinimalExample({Key? key, required this.child}) : super(key: key);
 
   @override
   State<MinimalExample> createState() => _MinimalExampleState();
@@ -119,41 +133,35 @@ class _MinimalExampleState extends State<MinimalExample> {
     print("Initialize Minimal Example State");
   }
 
-  List<PersistentTabConfig> _tabs() {
-    return [
-      PersistentTabConfig(
-        screen: MainScreen(),
-        item: ItemConfig(
-          icon: Icon(Icons.home),
-          title: "Home",
-        ),
-        navigatorConfig: NavigatorConfig(
-          navigatorKey: navigatorKey,
-        ),
-      ),
-      PersistentTabConfig(
-        screen: MainScreen(),
-        item: ItemConfig(
-          icon: Icon(Icons.message),
-          title: "Messages",
-        ),
-      ),
-      PersistentTabConfig(
-        screen: MainScreen(),
-        item: ItemConfig(
-          icon: Icon(Icons.settings),
-          title: "Settings",
-        ),
-      ),
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
     print("Rebuilding Minimal Example");
-    return PersistentTabView(
+    return PersistentTabView.child(
+      child: widget.child,
       controller: controller,
-      tabs: _tabs(),
+      tabs: [
+        PersistentTabConfig(
+          screen: Container(),
+          item: ItemConfig(
+            icon: Icon(Icons.home),
+            title: "Home",
+          ),
+        ),
+        PersistentTabConfig(
+          screen: Container(),
+          item: ItemConfig(
+            icon: Icon(Icons.message),
+            title: "Messages",
+          ),
+        ),
+        PersistentTabConfig(
+          screen: Container(),
+          item: ItemConfig(
+            icon: Icon(Icons.settings),
+            title: "Settings",
+          ),
+        ),
+      ],
       navBarBuilder: (navBarConfig) => Style1BottomNavBar(
         navBarConfig: navBarConfig,
         navBarDecoration: NavBarDecoration(

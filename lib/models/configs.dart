@@ -86,7 +86,7 @@ class PersistentTabConfig {
     this.onSelectedTabPressWhenNoScreensPushed,
   }) : onPressed = null;
 
-  PersistentTabConfig.noScreen({
+  PersistentTabConfig.tapAction({
     required this.item,
     required this.onPressed,
     this.navigatorConfig = const NavigatorConfig(),

@@ -111,34 +111,26 @@ class _PersistentTabViewScaffoldState extends State<PersistentTabViewScaffold>
       extendBody: true,
       floatingActionButton: widget.floatingActionButton,
       floatingActionButtonLocation: widget.floatingActionButtonLocation,
-      body: Builder(builder: (context) {
-        return _TabSwitchingView(
-          currentTabIndex: widget.controller.index,
-          tabCount: widget.tabCount,
-          tabBuilder: (context, index) {
-            double overlap = 0.0;
-            bool isNotOpaque = index > widget.opacities.length
-                ? false
-                : widget.opacities[index] != 1.0;
-            if ((isNotOpaque &&
-                    widget.navBarOverlap.fullOverlapWhenNotOpaque) ||
-                !_navBarFullyShown ||
-                widget.margin.bottom != 0) {
-              overlap = double.infinity;
-            } else {
-              overlap = widget.navBarOverlap.overlap;
-            }
+      body: Builder(
+        builder: (context) {
+          double overlap = 0.0;
+          bool isNotOpaque =
+              0 > widget.opacities.length ? false : widget.opacities[0] != 1.0;
+          if ((isNotOpaque && widget.navBarOverlap.fullOverlapWhenNotOpaque) ||
+              !_navBarFullyShown ||
+              widget.margin.bottom != 0) {
+            overlap = double.infinity;
+          } else {
+            overlap = widget.navBarOverlap.overlap;
+          }
 
-            return PersistentTab(
-              child: widget.tabBuilder(context, index),
-              bottomMargin:
-                  max(0, MediaQuery.of(context).padding.bottom - overlap),
-            );
-          },
-          stateManagement: widget.stateManagement,
-          screenTransitionAnimation: widget.screenTransitionAnimation,
-        );
-      }),
+          return PersistentTab(
+            child: widget.tabBuilder(context, 0),
+            bottomMargin:
+                max(0, MediaQuery.of(context).padding.bottom - overlap),
+          );
+        },
+      ),
       bottomNavigationBar: SlideTransition(
         position: slideAnimation,
         child: MediaQuery(

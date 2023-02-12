@@ -85,6 +85,8 @@ class PersistentTabView extends StatefulWidget {
   /// Hides the navigation bar with a transition animation. Defaults to `false`.
   final bool hideNavigationBar;
 
+  final Widget? child;
+
   /// Creates a fullscreen container with a navigation bar at the bottom. The
   /// navigation bar style can be chosen from [NavBarStyle]. If you want to
   /// make a custom style use [PersistentTabView.custom].
@@ -114,7 +116,34 @@ class PersistentTabView extends StatefulWidget {
     this.handleAndroidBackButtonPress = true,
     this.hideNavigationBar = false,
     this.screenTransitionAnimation = const ScreenTransitionAnimation(),
-  }) : super(key: key);
+  })  : child = null,
+        super(key: key);
+
+  PersistentTabView.child({
+    Key? key,
+    required this.tabs,
+    required this.navBarBuilder,
+    required this.child,
+    this.controller,
+    this.navBarHeight = kBottomNavigationBarHeight,
+    this.navBarOverlap = const NavBarOverlap.full(),
+    this.margin = EdgeInsets.zero,
+    this.backgroundColor = Colors.white,
+    this.onTabChanged,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
+    this.resizeToAvoidBottomInset = true,
+    this.avoidBottomPadding = true,
+    this.onWillPop,
+    this.handleAndroidBackButtonPress = true,
+    this.hideNavigationBar = false,
+  })  : popActionScreens = null,
+        popAllScreensOnTapOfSelectedTab = false,
+        popAllScreensOnTapAnyTabs = false,
+        selectedTabContext = null,
+        screenTransitionAnimation = ScreenTransitionAnimation(),
+        stateManagement = false,
+        super(key: key);
 
   @override
   _PersistentTabViewState createState() => _PersistentTabViewState();
@@ -195,6 +224,7 @@ class _PersistentTabViewState extends State<PersistentTabView> {
           ),
         ),
         tabBuilder: (BuildContext context, int index) {
+          if (widget.child != null) return widget.child!;
           return _buildScreen(index);
         },
       );
