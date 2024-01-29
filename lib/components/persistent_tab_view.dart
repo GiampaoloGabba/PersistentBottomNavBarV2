@@ -313,7 +313,7 @@ class _PersistentTabViewState extends State<PersistentTabView> {
         ),
         tabBuilder: (context, index) => _buildScreen(index),
         animatedTabBuilder: widget.animatedTabBuilder,
-        //navigationShell: widget.navigationShell,
+        navigationShell: widget.navigationShell,
       );
 
   @override
