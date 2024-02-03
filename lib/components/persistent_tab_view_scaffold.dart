@@ -149,7 +149,7 @@ class _PersistentTabViewScaffoldState extends State<PersistentTabViewScaffold>
         key: widget.controller.scaffoldKey,
         resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
         backgroundColor: widget.backgroundColor,
-        extendBody: true,
+        extendBody: widget.avoidBottomPadding,
         floatingActionButton: widget.floatingActionButton,
         floatingActionButtonLocation: widget.floatingActionButtonLocation,
         drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
